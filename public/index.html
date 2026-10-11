@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="मध्य प्रदेश में ज़मीन का रिकॉर्ड खुद देखें, खरीदने से पहले 14 जाँच, पुश्तैनी ज़मीन खोजें। मुफ़्त, आम भाषा में।">
+<meta property="og:title" content="ज़मीन की बात">
+<meta property="og:description" content="अपनी ज़मीन का सच, खुद जानिए। खसरा, B-1, नामांतरण, पुश्तैनी ज़मीन: मुफ़्त मदद।">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1E4C9A">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>ज़मीन की बात</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Mukta:wght@400;500;700&display=swap">
+<style>
+/* Layout: a single phone-first column that reads like a patwari's register: ruled headers, red margin rule, ink-blue entries */
+:root{
+  --bg:#EEF1EA;          /* pale field paper */
+  --sheet:#FBFCF8;       /* register page */
+  --fg:#1B2330;          /* ink */
+  --muted:#5A6472;
+  --ink:#1E4C9A;         /* patwari blue ink */
+  --ink-soft:#DCE5F4;
+  --rule:#B0362B;        /* register red rule */
+  --rule-soft:#F3DEDA;
+  --mustard:#C8930F;     /* stamp paper / mustard field */
+  --mustard-soft:#F6EBCB;
+  --ok:#2E7D4F;
+  --line:#D5DACF;
+  --display:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;
+  --body:"Mukta","Noto Sans Devanagari","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11151B;--sheet:#181E26;--fg:#E7EAEE;--muted:#9AA3AF;--ink:#8FB2F0;--ink-soft:#22324D;
+  --rule:#E07A6E;--rule-soft:#3A2522;--mustard:#E2B23E;--mustard-soft:#3A3018;--ok:#6CC08F;--line:#2B333D;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11151B;--sheet:#181E26;--fg:#E7EAEE;--muted:#9AA3AF;--ink:#8FB2F0;--ink-soft:#22324D;
+  --rule:#E07A6E;--rule-soft:#3A2522;--mustard:#E2B23E;--mustard-soft:#3A3018;--ok:#6CC08F;--line:#2B333D;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6}
+.wrap{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:flex;flex-direction:column;gap:28px}
+a{color:var(--ink)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.25}
+p{margin:0}
+
+/* masthead */
+.mast{display:flex;flex-direction:column;gap:14px;padding-top:8px}
+.brand{display:flex;align-items:center;gap:12px}
+.seal{width:52px;height:52px;border-radius:50%;background:var(--mustard);display:grid;place-items:center;color:#1B2330;font-family:var(--display);font-size:15px;line-height:1.05;text-align:center;flex:none;box-shadow:inset 0 0 0 3px var(--sheet),inset 0 0 0 4px #1B2330}
+.brand-name{font-family:var(--display);font-size:30px;line-height:1.1}
+.brand-tag{color:var(--muted);font-size:15px}
+.hero h1{font-size:clamp(30px,7.5vw,44px)}
+.hero h1 em{font-style:normal;color:var(--ink);background:linear-gradient(transparent 62%,var(--mustard-soft) 62%)}
+.hero p{color:var(--muted);margin-top:8px;max-width:58ch}
+
+/* register slip in hero */
+.slip{background:var(--sheet);border:1px solid var(--line);border-left:4px double var(--rule);border-radius:4px;overflow:hidden}
+.slip-head{display:flex;justify-content:space-between;gap:8px;padding:8px 14px;border-bottom:2px solid var(--rule);font-size:13px;color:var(--rule);letter-spacing:.04em}
+.slip-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.slip-grid div{padding:8px 14px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);min-width:0}
+.slip-grid div:nth-child(3n){border-right:0}
+.slip-grid small{display:block;color:var(--muted);font-size:12px}
+.slip-grid b{font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums;font-size:16px}
+.slip-note{padding:8px 14px;font-size:13px;color:var(--muted)}
+
+/* task picker */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:8px;margin-inline:-16px;padding-inline:16px;border-bottom:1px solid var(--line)}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;font:inherit;font-size:15px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--sheet);color:var(--fg);cursor:pointer;text-decoration:none;white-space:nowrap}
+.chip:hover{border-color:var(--ink)}
+
+/* sections styled as register pages */
+.page{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:20px 18px 22px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:72px}
+.page-head{display:flex;flex-direction:column;gap:4px;padding-bottom:10px;border-bottom:3px double var(--rule)}
+.kicker{font-size:13px;letter-spacing:.06em;color:var(--rule)}
+.page-head h2{font-size:clamp(24px,5.6vw,30px)}
+.lead{color:var(--muted)}
+
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:10px}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:start}
+ol.steps li::before{content:counter(s);width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink);color:var(--ink);display:grid;place-items:center;font-size:14px;font-weight:700;margin-top:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:500;font-size:16px;padding:11px 18px;border-radius:6px;border:0;background:var(--ink);color:var(--sheet);text-decoration:none;cursor:pointer;min-height:46px}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px}
+.note{background:var(--mustard-soft);border-radius:6px;padding:10px 14px;font-size:15px}
+.warn{background:var(--rule-soft);border-radius:6px;padding:10px 14px;font-size:15px}
+.url{font-family:ui-monospace,Menlo,monospace;font-size:14px;word-break:break-all;color:var(--muted)}
+
+/* checklist */
+.meter{display:flex;align-items:center;gap:12px}
+.bar{flex:1;height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.meter span{font-variant-numeric:tabular-nums;font-size:15px;color:var(--muted);white-space:nowrap}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.checks li{border-bottom:1px solid var(--line)}
+.checks label{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;padding:10px 0;cursor:pointer}
+.checks input{width:22px;height:22px;margin-top:3px;accent-color:var(--ok)}
+.checks b{font-weight:500}
+.checks small{display:block;color:var(--muted);font-size:14px;line-height:1.45}
+.checks input:checked + span b{text-decoration:line-through;text-decoration-color:var(--ok)}
+
+/* wizard */
+.q{display:flex;flex-direction:column;gap:8px}
+.q h3{font-family:var(--body);font-weight:700;font-size:17px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{font:inherit;font-size:15px;padding:8px 14px;border-radius:6px;border:1.5px solid var(--line);background:var(--sheet);color:var(--fg);cursor:pointer;text-align:left}
+.opt[aria-pressed="true"]{border-color:var(--ink);background:var(--ink-soft);color:var(--fg)}
+.result{border-left:4px solid var(--ink);padding:12px 14px;background:var(--ink-soft);border-radius:0 6px 6px 0;display:flex;flex-direction:column;gap:10px}
+.result h3{font-size:20px}
+.result ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.result .flag{color:var(--rule);font-weight:500}
+
+/* glossary */
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;padding:10px 0;display:flex;justify-content:space-between;gap:12px;align-items:baseline;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary b{font-family:var(--display);font-weight:400;font-size:20px}
+summary span{color:var(--muted);font-size:14px;text-align:right}
+details p{padding:0 0 12px;color:var(--fg)}
+
+/* traps */
+.traps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+.trap{border:1px solid var(--line);border-top:3px solid var(--rule);border-radius:4px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.trap b{font-weight:700}
+.trap p{font-size:15px;color:var(--muted)}
+
+/* form */
+form{display:flex;flex-direction:column;gap:12px}
+.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field label{font-size:14px;color:var(--muted)}
+input[type=text],select,textarea{font:inherit;font-size:16px;padding:10px 12px;border-radius:6px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);width:100%}
+textarea{min-height:96px;resize:vertical}
+.summary{white-space:pre-wrap;background:var(--bg);border:1px dashed var(--ink);border-radius:6px;padding:12px 14px;font-size:15px}
+.toast{font-size:14px;color:var(--ok);min-height:1.4em}
+
+footer{font-size:14px;color:var(--muted);display:flex;flex-direction:column;gap:6px;border-top:3px double var(--rule);padding-top:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="brand">
+      <div class="seal" aria-hidden="true">ज़मीन<br>की बात</div>
+      <div>
+        <div class="brand-name">ज़मीन की बात</div>
+        <div class="brand-tag">मध्य प्रदेश • प्रॉपर्टी कानून, आम भाषा में</div>
+      </div>
+    </div>
+    <div class="hero">
+      <h1>अपनी ज़मीन का <em>सच</em>, खुद जानिए</h1>
+      <p>खसरा देखना, खरीदने से पहले जाँच, दादा-परदादा की ज़मीन खोजना। सब कुछ मुफ़्त, सरकारी पोर्टल के सीधे लिंक के साथ।</p>
+    </div>
+    <div class="slip" aria-label="खसरा रिकॉर्ड का उदाहरण">
+      <div class="slip-head"><span>खसरा पंचसाला • उदाहरण</span><span>नमूना, असली रिकॉर्ड नहीं</span></div>
+      <div class="slip-grid">
+        <div><small>ज़िला</small><b>भोपाल</b></div>
+        <div><small>तहसील</small><b>हुज़ूर</b></div>
+        <div><small>ग्राम</small><b>रातीबड़</b></div>
+        <div><small>खसरा नं.</small><b>142/3</b></div>
+        <div><small>रकबा (हे.)</small><b>0.405</b></div>
+        <div><small>भूमि</small><b>कृषि</b></div>
+      </div>
+      <div class="slip-note">इन्हीं चार चीज़ों से आप अपना पूरा रिकॉर्ड खोज सकते हैं: ज़िला, तहसील, गाँव और खसरा नंबर (या मालिक का नाम)।</div>
+    </div>
+  </header>
+
+  <nav class="nav" aria-label="आपको क्या करना है">
+    <div class="chips">
+      <a class="chip" href="#record">खसरा / B-1 देखें</a>
+      <a class="chip" href="#buy">खरीदने से पहले</a>
+      <a class="chip" href="#ancestral">पुश्तैनी ज़मीन</a>
+      <a class="chip" href="#mutation">नामांतरण / केस</a>
+      <a class="chip" href="#traps">धोखे से बचें</a>
+      <a class="chip" href="#words">शब्दकोश</a>
+      <a class="chip" href="#ask">सवाल भेजें</a>
+    </div>
+  </nav>
+
+  <!-- RECORD -->
+  <section class="page" id="record">
+    <div class="page-head">
+      <span class="kicker">पन्ना १ • मुफ़्त</span>
+      <h2>अपना खसरा और B-1 खुद देखें</h2>
+      <p class="lead">MP भूलेख (WebGIS 2.0) पर बिना किसी फ़ीस के, 2 मिनट में।</p>
+    </div>
+    <ol class="steps">
+      <li><span>नीचे दिए बटन से <b>MP भूलेख WebGIS 2.0</b> खोलें।</span></li>
+      <li><span>ज़िला, तहसील और गाँव चुनें। नाम की स्पेलिंग वही रखें जो आपके कागज़ों में है।</span></li>
+      <li><span><b>खसरा नंबर</b> या <b>मालिक के नाम</b> से खोजें।</span></li>
+      <li><span>खसरा और B-1 (खतौनी) दोनों खोलें। दोनों में <b>मालिक का नाम एक जैसा</b> होना चाहिए।</span></li>
+      <li><span>भू-नक्शा पर ज़मीन की जगह देखें और मौके से मिलाएं।</span></li>
+    </ol>
+    <div class="btn-row">
+      <a class="btn" href="https://webgis2.mpbhulekh.gov.in/" target="_blank" rel="noopener">MP भूलेख खोलें ↗</a>
+    </div>
+    <p class="url">webgis2.mpbhulekh.gov.in</p>
+    <div class="note"><b>ध्यान दें:</b> मुफ़्त कॉपी सिर्फ़ जानकारी के लिए है। रजिस्ट्री, बैंक लोन या कोर्ट के लिए <b>प्रमाणित (सर्टिफ़ाइड) नकल</b> चाहिए। यह उसी पोर्टल पर लॉगिन करके, फ़ीस देकर मिलती है। फ़ीस पोर्टल पर "Calculate fee" में दिखती है।</div>
+  </section>
+
+  <!-- BUY CHECKLIST -->
+  <section class="page" id="buy">
+    <div class="page-head">
+      <span class="kicker">पन्ना २ • चेकलिस्ट</span>
+      <h2>प्रॉपर्टी खरीदने से पहले 14 जाँच</h2>
+      <p class="lead">हर जाँच पूरी होने पर टिक करें। आपकी टिक इसी फ़ोन पर याद रहती है।</p>
+    </div>
+    <div class="meter"><div class="bar"><i id="barFill"></i></div><span id="barText">0 / 14</span></div>
+    <ul class="checks" id="checks"></ul>
+    <div class="btn-row"><button class="btn alt" type="button" id="resetChecks">सारी टिक हटाएं</button></div>
+  </section>
+
+  <!-- ANCESTRAL WIZARD -->
+  <section class="page" id="ancestral">
+    <div class="page-head">
+      <span class="kicker">पन्ना ३ • 3 सवाल</span>
+      <h2>दादा-परदादा की ज़मीन कैसे खोजें?</h2>
+      <p class="lead">तीन सवालों के जवाब चुनें। आपके हालात के हिसाब से अगले कदम नीचे दिखेंगे।</p>
+    </div>
+    <div class="q" data-q="have">
+      <h3>1. आपके पास क्या है?</h3>
+      <div class="opts">
+        <button class="opt" type="button" data-v="khasra">पुराना खसरा / खसरा नंबर</button>
+        <button class="opt" type="button" data-v="deed">पुरानी रजिस्ट्री / बैनामा</button>
+        <button class="opt" type="button" data-v="village">सिर्फ़ गाँव और मालिक का नाम</button>
+        <button class="opt" type="button" data-v="nothing">कुछ नहीं, बस सुना है</button>
+      </div>
+    </div>
+    <div class="q" data-q="who">
+      <h3>2. रिकॉर्ड में आखिरी मालिक कौन था?</h3>
+      <div class="opts">
+        <button class="opt" type="button" data-v="father">पिता / माता</button>
+        <button class="opt" type="button" data-v="grand">दादा / दादी</button>
+        <button class="opt" type="button" data-v="older">परदादा या उससे पहले</button>
+      </div>
+    </div>
+    <div class="q" data-q="now">
+      <h3>3. ज़मीन पर अभी कौन है?</h3>
+      <div class="opts">
+        <button class="opt" type="button" data-v="unknown">पता नहीं / खाली है</button>
+        <button class="opt" type="button" data-v="family">परिवार का कोई और</button>
+        <button class="opt" type="button" data-v="outsider">कोई बाहरी व्यक्ति</button>
+        <button class="opt" type="button" data-v="govt">सरकार / कोई प्रोजेक्ट</button>
+      </div>
+    </div>
+    <div class="result" id="wizResult" aria-live="polite"></div>
+  </section>
+
+  <!-- MUTATION -->
+  <section class="page" id="mutation">
+    <div class="page-head">
+      <span class="kicker">पन्ना ४ • नामांतरण</span>
+      <h2>रजिस्ट्री हो गई, पर नाम नहीं चढ़ा?</h2>
+      <p class="lead">रजिस्ट्री से सौदा होता है। सरकारी रिकॉर्ड में आपका नाम <b>नामांतरण</b> से चढ़ता है। दोनों अलग हैं।</p>
+    </div>
+    <ol class="steps">
+      <li><span><b>पूरा खसरा खरीदा है?</b> तो नामांतरण आम तौर पर <b>साइबर तहसील</b> से अपने-आप होता है, बिना तहसील गए। आदेश ईमेल/व्हाट्सऐप पर आता है।</span></li>
+      <li><span><b>खसरे का हिस्सा खरीदा, विवाद है, या विरासत / दान का मामला है?</b> तो RCMS पोर्टल पर आवेदन करें या तहसील जाएं।</span></li>
+      <li><span>पहले से दिया आवेदन? RCMS पर <b>"आवेदन की वर्तमान स्थिति"</b> में देखें।</span></li>
+    </ol>
+    <div class="btn-row">
+      <a class="btn" href="https://rcms.mp.gov.in/" target="_blank" rel="noopener">RCMS खोलें ↗</a>
+      <a class="btn alt" href="https://sampada.mpigr.gov.in/" target="_blank" rel="noopener">संपदा 2.0 (रजिस्ट्री) ↗</a>
+    </div>
+    <p class="url">rcms.mp.gov.in • sampada.mpigr.gov.in</p>
+  </section>
+
+  <!-- TRAPS -->
+  <section class="page" id="traps">
+    <div class="page-head">
+      <span class="kicker">पन्ना ५ • सावधान</span>
+      <h2>ये गलतियाँ लाखों डुबो देती हैं</h2>
+    </div>
+    <div class="traps">
+      <div class="trap"><b>नोटरी से प्रॉपर्टी ट्रांसफ़र नहीं होती</b><p>नोटरी एग्रीमेंट या स्टाम्प पेपर पर लिखा-पढ़ी से मालिकाना हक नहीं मिलता। ₹100 से ज़्यादा की अचल संपत्ति की बिक्री सिर्फ़ रजिस्टर्ड बैनामे से होती है।</p></div>
+      <div class="trap"><b>पावर ऑफ़ अटॉर्नी से खरीदी = खरीदी नहीं</b><p>GPA या एग्रीमेंट के ज़रिये "बेचना" कानूनी बिक्री नहीं है (सुप्रीम कोर्ट, सूरज लैम्प्स, 2011)।</p></div>
+      <div class="trap"><b>रजिस्ट्री में नकद न दें</b><p>प्रॉपर्टी सौदे में ₹20,000 या उससे ज़्यादा नकद लेना आयकर कानून (धारा 269SS) में मना है। पूरा भुगतान बैंक से करें।</p></div>
+      <div class="trap"><b>आदिवासी ज़मीन</b><p>आदिवासी की ज़मीन गैर-आदिवासी को कलेक्टर की अनुमति के बिना नहीं बिक सकती (MPLRC धारा 165(6))। बिना अनुमति की रजिस्ट्री शुरू से शून्य।</p></div>
+      <div class="trap"><b>चरनोई / सरकारी ज़मीन</b><p>चरनोई, निस्तार या सरकारी ज़मीन पर बना मकान कभी भी हटाया जा सकता है। खसरे में भूमि का प्रकार ज़रूर देखें।</p></div>
+      <div class="trap"><b>40 साल रहने से मालिक नहीं बनते</b><p>कब्ज़ा अलग है, मालिकाना अलग। कागज़ों में नाम न हो तो आज ही जाँच कराएं।</p></div>
+    </div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section class="page" id="words">
+    <div class="page-head">
+      <span class="kicker">पन्ना ६ • शब्दकोश</span>
+      <h2>पटवारी की भाषा, आपकी भाषा में</h2>
+    </div>
+    <div id="glossary"></div>
+  </section>
+
+  <!-- ASK -->
+  <section class="page" id="ask">
+    <div class="page-head">
+      <span class="kicker">पन्ना ७ • सवाल</span>
+      <h2>अपना मामला भेजें</h2>
+      <p class="lead">नीचे भरें, "सारांश बनाएं" दबाएं, कॉपी करें और Instagram पर हमें भेज दें। जितनी साफ़ जानकारी, उतना सही जवाब।</p>
+    </div>
+    <form id="askForm" novalidate>
+      <div class="row2">
+        <div class="field"><label for="fName">आपका नाम</label><input type="text" id="fName" autocomplete="name"></div>
+        <div class="field"><label for="fRole">आप कौन हैं</label>
+          <select id="fRole">
+            <option>खरीदार</option><option>विक्रेता</option><option>वारिस / परिवार</option><option>मौजूदा मालिक</option>
+          </select></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="fDist">ज़िला</label><input type="text" id="fDist" placeholder="जैसे भोपाल"></div>
+        <div class="field"><label for="fTeh">तहसील</label><input type="text" id="fTeh" placeholder="जैसे हुज़ूर"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="fVil">गाँव / मोहल्ला</label><input type="text" id="fVil"></div>
+        <div class="field"><label for="fKh">खसरा नं. (पता हो तो)</label><input type="text" id="fKh"></div>
+      </div>
+      <div class="field"><label for="fIssue">समस्या क्या है?</label>
+        <select id="fIssue">
+          <option>खरीदने से पहले जाँच</option><option>पुश्तैनी ज़मीन खोजनी है</option><option>नामांतरण नहीं हुआ</option>
+          <option>बंटवारा</option><option>कब्ज़ा / विवाद</option><option>वसीयत</option><option>कुछ और</option>
+        </select></div>
+      <div class="field"><label for="fDocs">आपके पास कौन-से कागज़ हैं, और क्या हुआ?</label><textarea id="fDocs" placeholder="जैसे: दादाजी के नाम 1965 की रजिस्ट्री है, अभी खसरे में किसी और का नाम दिख रहा है।"></textarea></div>
+      <div class="btn-row"><button class="btn" type="submit">सारांश बनाएं</button></div>
+    </form>
+    <div id="sumBox" hidden>
+      <div class="summary" id="sumText"></div>
+      <div class="btn-row" style="margin-top:10px">
+        <button class="btn" type="button" id="copyBtn">कॉपी करें</button>
+        <a class="btn alt" href="https://ig.me/m/zameen.ki.baat" target="_blank" rel="noopener">Instagram पर भेजें ↗</a>
+      </div>
+      <p class="toast" id="toast" aria-live="polite"></p>
+      <p class="lead" style="font-size:14px">कॉपी करके Instagram चैट में पेस्ट करें। आधार, बैंक या OTP जैसी कोई निजी जानकारी कभी न भेजें।</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>ज़मीन की बात</b> • <a href="https://www.instagram.com/zameen.ki.baat/" target="_blank" rel="noopener">@zameen.ki.baat</a></p>
+    <p>यह सरकारी वेबसाइट नहीं है। यहाँ दी गई जानकारी सामान्य है, किसी मामले पर कानूनी सलाह नहीं। सरकारी फ़ीस, पोर्टल और प्रक्रिया बदल सकती है, इसलिए पोर्टल पर पुष्टि ज़रूर करें।</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+  /* ---------- checklist ---------- */
+  const CHECKS=[
+    ["खसरा और B-1 में विक्रेता का नाम","WebGIS पर दोनों में नाम, हिस्सा और रकबा मिलाएं।"],
+    ["नक्शे से मौके का मिलान","भू-नक्शा पर ज़मीन की जगह, आकार और पड़ोसी खसरे देखें।"],
+    ["30 साल की रजिस्ट्री की चेन","हर पिछले मालिक की रजिस्ट्री, बीच में कोई कड़ी न टूटे।"],
+    ["हर रजिस्ट्री के बाद नामांतरण","सिर्फ़ रजिस्ट्री काफ़ी नहीं, राजस्व रिकॉर्ड में नाम चढ़ा हो।"],
+    ["आदिवासी भूमि तो नहीं","धारा 165(6) वाली ज़मीन पर कलेक्टर अनुमति ज़रूरी।"],
+    ["चरनोई / सरकारी / नज़ूल / वन भूमि तो नहीं","खसरे में भूमि का प्रकार और टिप्पणी कॉलम पढ़ें।"],
+    ["बैंक लोन या गिरवी","संपदा 2.0 पर दस्तावेज़ खोज और बैंक से NOC।"],
+    ["कोर्ट या राजस्व केस","RCMS पर खसरा नंबर से लंबित केस देखें।"],
+    ["डायवर्सन (कृषि से आवासीय)","प्लॉट/मकान के लिए डायवर्सन आदेश की कॉपी लें।"],
+    ["कॉलोनी हो तो लाइसेंस और RERA","कॉलोनाइज़र लाइसेंस, नक्शा मंज़ूरी और MP RERA रजिस्ट्रेशन।"],
+    ["रास्ता किसका है","आपका रास्ता कहीं पड़ोसी की ज़मीन से तो नहीं जाता।"],
+    ["सभी मालिक / वारिस हस्ताक्षर करें","B-1 में जितने नाम, सबकी सहमति और हस्ताक्षर।"],
+    ["भुगतान सिर्फ़ बैंक से","₹20,000 या ज़्यादा नकद मना (धारा 269SS)।"],
+    ["सिर्फ़ रजिस्टर्ड बैनामा","नोटरी एग्रीमेंट या GPA पर भरोसा न करें।"]
+  ];
+  const ul=document.getElementById('checks');
+  let ticked=store.get('zkb-checks')||[];
+  CHECKS.forEach((c,i)=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<label><input type="checkbox" id="ck${i}"><span><b></b><small></small></span></label>`;
+    li.querySelector('b').textContent=c[0];li.querySelector('small').textContent=c[1];
+    const cb=li.querySelector('input');cb.checked=ticked.includes(i);
+    cb.addEventListener('change',()=>{ticked=CHECKS.map((_,j)=>j).filter(j=>document.getElementById('ck'+j).checked);store.set('zkb-checks',ticked);meter()});
+    ul.appendChild(li);
+  });
+  function meter(){const n=ticked.length;document.getElementById('barFill').style.width=(n/CHECKS.length*100)+'%';document.getElementById('barText').textContent=n+' / '+CHECKS.length}
+  meter();
+  document.getElementById('resetChecks').addEventListener('click',()=>{ticked=[];store.set('zkb-checks',ticked);CHECKS.forEach((_,j)=>document.getElementById('ck'+j).checked=false);meter()});
+
+  /* ---------- wizard ---------- */
+  const ans={have:'village',who:'grand',now:'unknown'};
+  document.querySelectorAll('.q').forEach(q=>{
+    const key=q.dataset.q;
+    q.querySelectorAll('.opt').forEach(b=>{
+      b.setAttribute('aria-pressed',b.dataset.v===ans[key]?'true':'false');
+      b.addEventListener('click',()=>{ans[key]=b.dataset.v;q.querySelectorAll('.opt').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));renderWiz()});
+    });
+  });
+  function renderWiz(){
+    const s=[];let flag='';
+    if(ans.have==='khasra') s.push('MP भूलेख पर <b>खसरा नंबर से</b> खोजें और देखें कि आज रिकॉर्ड में किसका नाम है।');
+    if(ans.have==='deed') s.push('रजिस्ट्री में लिखा <b>गाँव और खसरा नंबर</b> निकालें, फिर MP भूलेख पर उसी खसरे का आज का रिकॉर्ड देखें।');
+    if(ans.have==='village') s.push('MP भूलेख पर गाँव चुनकर <b>मालिक के नाम से</b> खोजें। नाम की अलग-अलग स्पेलिंग भी आज़माएं।');
+    if(ans.have==='nothing') s.push('परिवार के बड़ों से <b>गाँव, तहसील और मालिक का पूरा नाम</b> पता करें। पुराने बक्से में लगान की रसीद, खसरा या रजिस्ट्री ढूँढें।');
+    s.push('नाम आज के रिकॉर्ड में न मिले तो तहसील के अभिलेखागार से <b>पुराने वर्षों (जैसे 1958-59 के अधिकार अभिलेख)</b> की प्रमाणित नकल माँगें। कुछ गाँवों के स्कैन रिकॉर्ड पोर्टल पर भी हैं।');
+    if(ans.who==='father') s.push('पिता/माता के नाम से <b>वारिसाना नामांतरण</b> के लिए RCMS पर आवेदन करें: मृत्यु प्रमाण-पत्र और सभी वारिसों की सूची लगेगी।');
+    else s.push('हर पीढ़ी की कड़ी जोड़नी होगी: <b>हर मृत मालिक का मृत्यु प्रमाण-पत्र और वंशावली</b> तैयार करें। फिर वारिसाना नामांतरण के लिए आवेदन करें।');
+    if(ans.now==='family') s.push('परिवार में <b>बंटवारा</b> ज़रूरी हो सकता है। सबकी सहमति हो तो तहसील में आपसी बंटवारा आसान है।');
+    if(ans.now==='outsider'){s.push('कब्ज़ा करने वाले के कागज़ (रजिस्ट्री, नामांतरण आदेश) की नकल निकालें।');flag='बाहरी कब्ज़े में समय-सीमा मायने रखती है। देर करने से हक कमज़ोर हो सकता है, इसलिए जल्दी किसी वकील से मिलें।'}
+    if(ans.now==='govt'){s.push('ज़मीन किस योजना में गई, यह कलेक्टर / भू-अर्जन कार्यालय से पता करें, और <b>अवार्ड व मुआवज़े</b> की स्थिति देखें।');flag='मुआवज़ा अक्सर पुराने रिकॉर्ड वाले नाम पर पड़ा रहता है। वारिस साबित करके उस पर दावा किया जा सकता है।'}
+    if(ans.now==='unknown') s.push('मौके पर जाकर देखें कि ज़मीन पर कौन है, और पटवारी से <b>मौका-पंचनामा</b> की जानकारी लें।');
+    const el=document.getElementById('wizResult');
+    el.innerHTML='<h3>आपके अगले कदम</h3><ol>'+s.map(x=>'<li>'+x+'</li>').join('')+'</ol>'+(flag?'<p class="flag">⚠ '+flag+'</p>':'')+'<p><a href="#ask">अपना मामला भेजें →</a></p>';
+  }
+  renderWiz();
+
+  /* ---------- glossary ---------- */
+  const WORDS=[
+    ["खसरा","ज़मीन का पहचान रजिस्टर","हर ज़मीन के टुकड़े का नंबर, रकबा, मालिक, फ़सल और भूमि का प्रकार। खसरा नंबर से ही ज़मीन पहचानी जाती है।"],
+    ["B-1 (खतौनी)","किसके नाम कितनी ज़मीन","एक मालिक या परिवार के नाम दर्ज सभी खसरे और उनके हिस्से।"],
+    ["भू-नक्शा","ज़मीन का नक्शा","गाँव के नक्शे पर आपका खसरा कहाँ है, किस आकार का है, आसपास कौन-से खसरे हैं।"],
+    ["नामांतरण (म्यूटेशन)","रिकॉर्ड में नया नाम","बिक्री, विरासत या दान के बाद राजस्व रिकॉर्ड में नए मालिक का नाम चढ़ाना।"],
+    ["बंटवारा","हिस्सों का अलग होना","एक खसरे के साझा मालिकों के हिस्से अलग-अलग करके अलग खसरे बनाना।"],
+    ["अधिकार अभिलेख 1958-59","सबसे पुराना आम रिकॉर्ड","मध्य प्रदेश भू-राजस्व संहिता 1959 के समय तैयार रिकॉर्ड। पुराने हक साबित करने में अक्सर सबसे काम का कागज़।"],
+    ["वाजिब-उल-अर्ज़","गाँव का रिवाज-नामा","गाँव के पानी, रास्ते, चराई जैसे साझा हक और रिवाज का लिखित रिकॉर्ड।"],
+    ["चरनोई","पशु चराने की ज़मीन","गाँव के पशुओं के लिए अलग रखी ज़मीन (MPLRC धारा 237)। इसे खरीदा-बेचा नहीं जा सकता।"],
+    ["फ़ील्ड बुक","नाप-जोख का रिकॉर्ड","सर्वे के समय ज़मीन की लंबाई-चौड़ाई की नाप। सीमा विवाद में काम आती है।"],
+    ["डायवर्सन","ज़मीन का उपयोग बदलना","खेती की ज़मीन को आवासीय या व्यावसायिक उपयोग में बदलने की अनुमति।"],
+    ["नज़ूल","शहर की सरकारी ज़मीन","शहरी क्षेत्र की सरकारी ज़मीन, जो अक्सर लीज़ पर दी जाती है।"],
+    ["रकबा","क्षेत्रफल","ज़मीन का माप, रिकॉर्ड में आम तौर पर हेक्टेयर में। 1 हेक्टेयर ≈ 2.47 एकड़।"]
+  ];
+  const g=document.getElementById('glossary');
+  WORDS.forEach(w=>{const d=document.createElement('details');d.innerHTML='<summary><b></b><span></span></summary><p></p>';d.querySelector('b').textContent=w[0];d.querySelector('span').textContent=w[1];d.querySelector('p').textContent=w[2];g.appendChild(d)});
+
+  /* ---------- ask form ---------- */
+  const v=id=>document.getElementById(id).value.trim();
+  ['fName','fDist','fTeh','fVil','fKh','fDocs','fRole','fIssue'].forEach(id=>{
+    const el=document.getElementById(id);const saved=store.get('zkb-f-'+id);if(saved)el.value=saved;
+    el.addEventListener('input',()=>store.set('zkb-f-'+id,el.value));
+  });
+  document.getElementById('askForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const lines=['नमस्ते, ज़मीन की बात वेबसाइट से मेरा मामला:','',
+      'नाम: '+(v('fName')||'—'),'मैं: '+v('fRole'),'समस्या: '+v('fIssue'),
+      'जगह: '+([v('fVil'),v('fTeh'),v('fDist')].filter(Boolean).join(', ')||'—'),
+      'खसरा नं.: '+(v('fKh')||'पता नहीं'),'','विवरण: '+(v('fDocs')||'—')];
+    document.getElementById('sumText').textContent=lines.join('\n');
+    const box=document.getElementById('sumBox');box.hidden=false;box.scrollIntoView({block:'nearest'});
+    document.getElementById('toast').textContent='';
+  });
+  document.getElementById('copyBtn').addEventListener('click',()=>{
+    const t=document.getElementById('sumText').textContent,toast=document.getElementById('toast');
+    const fallback=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('sumText'));const s=getSelection();s.removeAllRanges();s.addRange(r);toast.textContent='टेक्स्ट चुन लिया गया है, अब कॉपी दबाएं।'};
+    try{navigator.clipboard.writeText(t).then(()=>{toast.textContent='कॉपी हो गया। अब Instagram पर पेस्ट करें।'},fallback)}catch(e){fallback()}
+  });
+})();
+</script>
+
+</body>
+</html>
