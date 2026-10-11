@@ -267,11 +267,14 @@ footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-si
 </div>
 
 <script src="i18n.js"></script>
+<!-- Visitor counting: GoatCounter (no cookies, no personal data) -->
+<script data-goatcounter="https://zameenkibaat.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script>
 (function(){
   const $=id=>document.getElementById(id);
   const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
   const LANGS=window.ZKB_LANGS, TT=window.ZKB_T;
+  const track=(path)=>{try{if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:path,title:path,event:true})}catch(e){}};
   let lang=store.get('zkb-lang'); if(!TT[lang]) lang=null;
   const T=()=>TT[lang||'hi'];
 
@@ -280,7 +283,7 @@ footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-si
     const b=document.createElement('button');b.type='button';b.className='langbtn';b.lang=l.html;b.dataset.code=l.code;
     b.innerHTML='<span><b></b><br><small></small></span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
     b.querySelector('b').textContent=l.name;b.querySelector('small').textContent=l.sub;
-    b.addEventListener('click',()=>{lang=l.code;store.set('zkb-lang',lang);applyLang();location.hash='#home';route()});
+    b.addEventListener('click',()=>{track('language-'+l.code);lang=l.code;store.set('zkb-lang',lang);applyLang();location.hash='#home';route()});
     $('langList').appendChild(b);
   });
 
@@ -312,6 +315,7 @@ footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-si
     $('backBtn').hidden=!on;$('brandName').hidden=!!on;$('langPill').hidden=!!on;
     if(on) $('brandSeal').hidden=true; else $('brandSeal').hidden=!(lang==='hi'||lang==='sd');
     window.scrollTo(0,0);
+    if(on) track('open-'+on);
   }
   window.addEventListener('hashchange',route);
 
@@ -391,7 +395,10 @@ footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-si
     e.preventDefault();const t=T();
     $('sumText').textContent=[t.sumHello,'',t.sumIssue+': '+t.chips[issueIdx],t.sumPlace+': '+($('fPlace').value.trim()||'—'),'',t.sumDetail+': '+($('fDocs').value.trim()||'—')].join('\n');
     $('askForm').hidden=true;$('sumBox').hidden=false;$('toast').textContent='';
+    track('case-written-'+(lang||'hi'));
   });
+  document.querySelector('#sumBox a[href*="ig.me"]').addEventListener('click',()=>track('case-sent-instagram'));
+  document.querySelectorAll('a[href*="mpbhulekh"],a[href*="rcms"],a[href*="sampada"]').forEach(a=>a.addEventListener('click',()=>track('portal-'+new URL(a.href).hostname.split('.')[0])));
   $('copyBtn').addEventListener('click',()=>{
     const t=T(),txt=$('sumText').textContent;
     const fb=()=>{const r=document.createRange();r.selectNodeContents($('sumText'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('toast').textContent=t.selected};
