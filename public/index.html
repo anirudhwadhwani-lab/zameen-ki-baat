@@ -4,28 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ज़मीन की बात</title>
-<meta name="description" content="मध्य प्रदेश में ज़मीन का रिकॉर्ड खुद देखें, खरीदने से पहले जाँच करें, पुश्तैनी ज़मीन खोजें। मुफ़्त, आसान भाषा में।">
+<meta name="description" content="मध्य प्रदेश में ज़मीन का रिकॉर्ड खुद देखें, खरीदने से पहले जाँच करें, पुश्तैनी ज़मीन खोजें। Hindi, English, Gujarati, Sindhi, French.">
 <meta property="og:title" content="ज़मीन की बात">
-<meta property="og:description" content="ज़मीन से जुड़ा सवाल? मुफ़्त, आसान मदद।">
+<meta property="og:description" content="ज़मीन से जुड़ा सवाल? मुफ़्त, आसान मदद। Free help with land records in Madhya Pradesh.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#1E4C9A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Mukta:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Mukta:wght@400;500;700&family=Noto+Sans+Gujarati:wght@400;500;700&family=Noto+Serif+Gujarati&display=swap">
 <style>
-/* Layout: an app-like home of big tap tiles; each tile opens one short screen. One thing on screen at a time. */
+/* Layout: language picker first, then an app-like home of big tap tiles; each tile opens one short screen. */
 :root{
   --bg:#EEF1EA; --card:#FFFFFF; --fg:#18202B; --muted:#56606D;
-  --ink:#1E4C9A; --ink-soft:#E3EAF6; --rule:#B0362B; --rule-soft:#F6E2DE;
-  --mustard:#C8930F; --mustard-soft:#F7EDCF; --ok:#2E7D4F; --ok-soft:#E2F1E8; --line:#D8DDD2; --on-ink:#FFFFFF;
-  --display:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;
-  --body:"Mukta","Noto Sans Devanagari","Segoe UI",system-ui,sans-serif;
+  --ink:#1E4C9A; --ink-soft:#E3EAF6; --on-ink:#FFFFFF; --rule:#B0362B; --rule-soft:#F6E2DE;
+  --mustard:#C8930F; --mustard-soft:#F7EDCF; --ok:#2E7D4F; --ok-soft:#E2F1E8; --line:#D8DDD2;
+  --display:"Tiro Devanagari Hindi","Noto Serif Gujarati","Noto Serif Devanagari",Georgia,serif;
+  --body:"Mukta","Noto Sans Gujarati","Noto Sans Devanagari","Segoe UI",system-ui,sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root{
   --bg:#11151B; --card:#1A2029; --fg:#E9ECEF; --muted:#9DA6B2;
-  --ink:#8FB2F0; --ink-soft:#22324D; --rule:#E58A7F; --rule-soft:#3B2623;
-  --mustard:#E2B23E; --mustard-soft:#3A3018; --ok:#6CC08F; --ok-soft:#1D3227; --line:#2C343E; --on-ink:#0F1E36; color-scheme:dark}}
+  --ink:#8FB2F0; --ink-soft:#22324D; --on-ink:#0F1E36; --rule:#E58A7F; --rule-soft:#3B2623;
+  --mustard:#E2B23E; --mustard-soft:#3A3018; --ok:#6CC08F; --ok-soft:#1D3227; --line:#2C343E; color-scheme:dark}}
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -36,22 +36,34 @@ a{color:var(--ink)}
 :focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
 h1,h2,h3,p{margin:0}
 h1,h2{font-family:var(--display);font-weight:400;line-height:1.25;text-wrap:balance}
-
 .wrap{max-width:560px;margin:0 auto;padding-inline:16px;padding-block:16px 40px}
 
 /* top bar */
 .top{display:flex;align-items:center;gap:10px;min-height:52px}
-.seal{width:40px;height:40px;border-radius:50%;background:var(--mustard);color:#18202B;display:grid;place-items:center;font-family:var(--display);font-size:11px;line-height:1.05;text-align:center;flex:none}
-.top-name{font-family:var(--display);font-size:22px}
-.back{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:17px;font-weight:500;color:var(--ink);background:var(--ink-soft);border:0;border-radius:999px;padding:8px 16px 8px 12px;text-decoration:none;min-height:44px}
+.seal{width:40px;height:40px;border-radius:50%;background:var(--mustard);color:#18202B;display:grid;place-items:center;font-family:"Tiro Devanagari Hindi",serif;font-size:11px;line-height:1.05;text-align:center;flex:none}
+.top-name{font-family:var(--display);font-size:22px;flex:1;min-width:0}
+.back,.langpill{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:16px;font-weight:500;color:var(--ink);background:var(--ink-soft);border:0;border-radius:999px;padding:8px 14px 8px 12px;text-decoration:none;min-height:44px;white-space:nowrap}
+.langpill{margin-left:auto}
+.back svg,.langpill svg{width:18px;height:18px;flex:none}
+
+/* language picker */
+.pick{display:flex;flex-direction:column;gap:18px;padding-top:28px}
+.pick-mark{width:72px;height:72px;border-radius:50%;background:var(--mustard);color:#18202B;display:grid;place-items:center;font-family:"Tiro Devanagari Hindi",serif;font-size:18px;line-height:1.05;text-align:center}
+.pick h1{font-size:clamp(28px,7.5vw,36px)}
+.pick .sub{color:var(--muted);margin-top:-8px}
+.langs{display:flex;flex-direction:column;gap:10px}
+.langbtn{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;font:inherit;text-align:left;padding:16px 18px;min-height:68px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
+.langbtn b{font-size:22px;font-weight:700}
+.langbtn small{color:var(--muted);font-size:15px}
+.langbtn[aria-current="true"]{border-color:var(--ink);background:var(--ink-soft)}
+.langbtn:active{transform:scale(.99)}
 
 /* home */
 .hello{padding-block:18px 18px;display:flex;flex-direction:column;gap:6px}
 .hello h1{font-size:clamp(30px,8vw,40px)}
 .hello p{color:var(--muted)}
 .tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.tile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 14px;min-height:128px;
-  display:flex;flex-direction:column;justify-content:space-between;gap:10px;text-decoration:none;color:var(--fg);transition:transform .15s}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 14px;min-height:128px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;text-decoration:none;color:var(--fg);transition:transform .15s}
 .tile:active{transform:scale(.98)}
 .tile .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--ink-soft);color:var(--ink)}
 .tile .ic svg{width:26px;height:26px}
@@ -71,14 +83,12 @@ h1,h2{font-family:var(--display);font-weight:400;line-height:1.25;text-wrap:bala
 .screen-head{display:flex;flex-direction:column;gap:6px}
 .screen-head h2{font-size:clamp(26px,7vw,32px)}
 .screen-head p{color:var(--muted)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
-.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;font:inherit;font-size:18px;font-weight:700;
-  padding:14px 18px;min-height:54px;border-radius:12px;border:0;background:var(--ink);color:var(--on-ink);text-decoration:none;cursor:pointer}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:4px}
+.card span{color:var(--muted);font-size:16px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;font:inherit;font-size:18px;font-weight:700;padding:14px 18px;min-height:54px;border-radius:12px;border:0;background:var(--ink);color:var(--on-ink);text-decoration:none;cursor:pointer;text-align:center}
 .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
 .btn-col{display:flex;flex-direction:column;gap:10px}
 .tip{background:var(--mustard-soft);border-radius:12px;padding:12px 14px;font-size:16px}
-
-/* big numbered steps */
 .steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;counter-reset:s}
 .steps li{counter-increment:s;display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:center;font-size:18px}
 .steps li::before{content:counter(s);width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--on-ink);display:grid;place-items:center;font-weight:700}
@@ -101,7 +111,7 @@ h1,h2{font-family:var(--display);font-weight:400;line-height:1.25;text-wrap:bala
 .dots i{height:6px;flex:1;border-radius:3px;background:var(--line)}
 .dots i.on{background:var(--ink)}
 .qtitle{font-size:22px;font-weight:700}
-.choices{display:flex;flex-direction:column;gap:10px}
+.choices{display:flex;flex-direction:column;gap:10px;margin-top:14px}
 .choice{font:inherit;font-size:18px;text-align:left;padding:14px 16px;min-height:56px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
 .choice:active{border-color:var(--ink)}
 .result{display:flex;flex-direction:column;gap:14px}
@@ -112,7 +122,7 @@ h1,h2{font-family:var(--display);font-weight:400;line-height:1.25;text-wrap:bala
 .trap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px;align-items:start}
 .trap .x{width:36px;height:36px;border-radius:50%;background:var(--rule-soft);color:var(--rule);display:grid;place-items:center;font-weight:700;font-size:20px}
 .trap b{display:block;font-size:18px}
-.trap span{color:var(--muted);font-size:16px}
+.trap div span{color:var(--muted);font-size:16px}
 
 /* glossary */
 .search{font:inherit;font-size:18px;width:100%;padding:14px 16px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--fg)}
@@ -127,7 +137,7 @@ details.w p{padding-bottom:14px;color:var(--muted);font-size:17px}
 
 /* form */
 .field{display:flex;flex-direction:column;gap:6px}
-.field label{font-weight:500}
+.field label,.field .lbl{font-weight:500}
 input[type=text],textarea{font:inherit;font-size:18px;padding:14px 16px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--fg);width:100%}
 textarea{min-height:110px;resize:vertical}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
@@ -144,291 +154,251 @@ footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-si
 <body>
 <div class="wrap">
 
-  <!-- top bar -->
-  <div class="top">
-    <a class="back" id="backBtn" href="#" hidden aria-label="वापस होम पर">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>वापस
+  <!-- top bar (hidden on the language screen) -->
+  <div class="top" id="topBar" hidden>
+    <a class="back" id="backBtn" href="#home" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg><span data-t="back"></span>
     </a>
     <div class="seal" id="brandSeal" aria-hidden="true">ज़मीन<br>की बात</div>
-    <div class="top-name" id="brandName">ज़मीन की बात</div>
+    <div class="top-name" id="brandName" data-t="brand"></div>
+    <a class="langpill" id="langPill" href="#lang">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span data-t="lang"></span>
+    </a>
   </div>
 
+  <!-- LANGUAGE PICKER -->
+  <section class="pick" id="lang" hidden>
+    <div class="pick-mark" aria-hidden="true">ज़मीन<br>की बात</div>
+    <h1>भाषा चुनें · Choose language</h1>
+    <p class="sub">ભાષા પસંદ કરો · ॿोली चूंडियो · Choisissez la langue</p>
+    <div class="langs" id="langList"></div>
+  </section>
+
   <!-- HOME -->
-  <main id="home">
+  <main id="home" hidden>
     <div class="hello">
-      <h1>ज़मीन से जुड़ा सवाल?</h1>
-      <p>नीचे से चुनिए। सब मुफ़्त है।</p>
+      <h1 data-t="h1"></h1>
+      <p data-t="hp"></p>
     </div>
     <div class="tiles">
-      <a class="tile" href="#record">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span>
-        <b>खसरा देखें<small>2 मिनट में</small></b>
-      </a>
-      <a class="tile ok" href="#buy">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></span>
-        <b>खरीदने से पहले<small>14 ज़रूरी जाँच</small></b>
-      </a>
-      <a class="tile gold" href="#ancestral">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
-        <b>पुश्तैनी ज़मीन<small>3 सवाल, आपका रास्ता</small></b>
-      </a>
-      <a class="tile" href="#mutation">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></span>
-        <b>नाम नहीं चढ़ा?<small>नामांतरण</small></b>
-      </a>
-      <a class="tile warn" href="#traps">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 10v4M12 18h.01"/></svg></span>
-        <b>धोखे से बचें<small>6 बड़ी गलतियाँ</small></b>
-      </a>
-      <a class="tile" href="#words">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></span>
-        <b>शब्दों का मतलब<small>खसरा, B-1, चरनोई…</small></b>
-      </a>
+      <a class="tile" href="#record"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><b data-tile="0"></b></a>
+      <a class="tile ok" href="#buy"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></span><b data-tile="1"></b></a>
+      <a class="tile gold" href="#ancestral"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span><b data-tile="2"></b></a>
+      <a class="tile" href="#mutation"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></span><b data-tile="3"></b></a>
+      <a class="tile warn" href="#traps"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 10v4M12 18h.01"/></svg></span><b data-tile="4"></b></a>
+      <a class="tile" href="#words"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></span><b data-tile="5"></b></a>
     </div>
     <a class="cta" href="#ask">
-      <span><b>अपना मामला भेजें</b><small>हम पढ़कर जवाब देंगे</small></span>
+      <span><b data-t="cta"></b><small data-t="ctaSub"></small></span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     </a>
-    <p class="trust">यह सरकारी वेबसाइट नहीं है • सरकारी पोर्टल के सीधे लिंक</p>
+    <p class="trust" data-t="trust"></p>
   </main>
 
   <!-- RECORD -->
   <section class="screen" id="record" hidden>
-    <div class="screen-head">
-      <h2>अपना खसरा खुद देखें</h2>
-      <p>मुफ़्त, बिना लॉगिन।</p>
-    </div>
-    <ol class="steps">
-      <li>नीचे का बटन दबाएं</li>
-      <li>ज़िला, तहसील, गाँव चुनें</li>
-      <li>खसरा नंबर या मालिक का नाम डालें</li>
-    </ol>
-    <a class="btn" href="https://webgis2.mpbhulekh.gov.in/" target="_blank" rel="noopener">MP भूलेख खोलें ↗</a>
-    <p class="tip"><b>याद रखें:</b> रजिस्ट्री, लोन या कोर्ट के लिए <b>प्रमाणित नकल</b> चाहिए। वह इसी पोर्टल पर फ़ीस देकर मिलती है।</p>
+    <div class="screen-head"><h2 data-t="recH"></h2><p data-t="recP"></p></div>
+    <ol class="steps" data-list="recSteps"></ol>
+    <a class="btn" href="https://webgis2.mpbhulekh.gov.in/" target="_blank" rel="noopener" data-t="recBtn"></a>
+    <p class="tip" data-th="recTip"></p>
   </section>
 
   <!-- BUY -->
   <section class="screen" id="buy" hidden>
-    <div class="screen-head">
-      <h2>खरीदने से पहले 14 जाँच</h2>
-      <p>हर जाँच पर टिक करें। <b>?</b> दबाकर ज़्यादा जानें।</p>
-    </div>
+    <div class="screen-head"><h2 data-t="buyH"></h2><p data-th="buyP"></p></div>
     <div class="meter"><div class="bar"><i id="barFill"></i></div><span id="barText">0/14</span></div>
     <ul class="checks" id="checks"></ul>
-    <button class="btn ghost" type="button" id="resetChecks">फिर से शुरू करें</button>
+    <button class="btn ghost" type="button" id="resetChecks" data-t="reset"></button>
   </section>
 
   <!-- ANCESTRAL -->
   <section class="screen" id="ancestral" hidden>
-    <div class="screen-head">
-      <h2>पुश्तैनी ज़मीन खोजें</h2>
-    </div>
+    <div class="screen-head"><h2 data-t="ancH"></h2></div>
     <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
     <div id="wiz"></div>
   </section>
 
   <!-- MUTATION -->
   <section class="screen" id="mutation" hidden>
-    <div class="screen-head">
-      <h2>रजिस्ट्री हुई, नाम नहीं चढ़ा?</h2>
-      <p>रिकॉर्ड में नाम <b>नामांतरण</b> से चढ़ता है।</p>
-    </div>
-    <div class="card"><b>पूरा खसरा खरीदा?</b><br><span class="small" style="font-size:16px">साइबर तहसील से अपने-आप हो जाता है। आदेश ईमेल/व्हाट्सऐप पर आता है।</span></div>
-    <div class="card"><b>आधा खसरा, विरासत, दान या विवाद?</b><br><span class="small" style="font-size:16px">RCMS पोर्टल पर आवेदन करें या तहसील जाएं।</span></div>
+    <div class="screen-head"><h2 data-t="mutH"></h2><p data-th="mutP"></p></div>
+    <div class="card"><b data-t="mut1t"></b><span data-t="mut1"></span></div>
+    <div class="card"><b data-t="mut2t"></b><span data-t="mut2"></span></div>
     <div class="btn-col">
-      <a class="btn" href="https://rcms.mp.gov.in/" target="_blank" rel="noopener">RCMS पर आवेदन / स्थिति ↗</a>
-      <a class="btn ghost" href="https://sampada.mpigr.gov.in/" target="_blank" rel="noopener">संपदा 2.0 (रजिस्ट्री) ↗</a>
+      <a class="btn" href="https://rcms.mp.gov.in/" target="_blank" rel="noopener" data-t="mutB1"></a>
+      <a class="btn ghost" href="https://sampada.mpigr.gov.in/" target="_blank" rel="noopener" data-t="mutB2"></a>
     </div>
   </section>
 
   <!-- TRAPS -->
   <section class="screen" id="traps" hidden>
-    <div class="screen-head">
-      <h2>ये गलतियाँ न करें</h2>
-    </div>
+    <div class="screen-head"><h2 data-t="trapsH"></h2></div>
     <div class="traps" id="trapList"></div>
   </section>
 
   <!-- WORDS -->
   <section class="screen" id="words" hidden>
-    <div class="screen-head">
-      <h2>शब्दों का मतलब</h2>
-    </div>
-    <input class="search" id="wordSearch" type="text" placeholder="शब्द खोजें, जैसे खसरा" aria-label="शब्द खोजें">
+    <div class="screen-head"><h2 data-t="wordsH"></h2></div>
+    <input class="search" id="wordSearch" type="text" data-ph="search">
     <div class="words" id="wordList"></div>
   </section>
 
   <!-- ASK -->
   <section class="screen" id="ask" hidden>
-    <div class="screen-head">
-      <h2>अपना मामला भेजें</h2>
-      <p>3 चीज़ें भरें, फिर Instagram पर भेजें।</p>
-    </div>
+    <div class="screen-head"><h2 data-t="askH"></h2><p data-t="askP"></p></div>
     <form id="askForm" class="btn-col" novalidate>
-      <div class="field">
-        <label>1. समस्या क्या है?</label>
-        <div class="chips" id="issueChips">
-          <button class="chip" type="button" aria-pressed="true">खरीदने से पहले जाँच</button>
-          <button class="chip" type="button" aria-pressed="false">पुश्तैनी ज़मीन</button>
-          <button class="chip" type="button" aria-pressed="false">नाम नहीं चढ़ा</button>
-          <button class="chip" type="button" aria-pressed="false">बंटवारा</button>
-          <button class="chip" type="button" aria-pressed="false">कब्ज़ा / विवाद</button>
-          <button class="chip" type="button" aria-pressed="false">कुछ और</button>
-        </div>
-      </div>
-      <div class="field"><label for="fPlace">2. ज़मीन कहाँ है?</label><input type="text" id="fPlace" placeholder="गाँव, तहसील, ज़िला"></div>
-      <div class="field"><label for="fDocs">3. थोड़ा बताइए</label><textarea id="fDocs" placeholder="जैसे: दादाजी के नाम की 1965 की रजिस्ट्री है, खसरे में किसी और का नाम है।"></textarea></div>
-      <button class="btn" type="submit">आगे बढ़ें</button>
+      <div class="field"><span class="lbl" data-t="l1"></span><div class="chips" id="issueChips"></div></div>
+      <div class="field"><label for="fPlace" data-t="l2"></label><input type="text" id="fPlace" data-ph="ph2"></div>
+      <div class="field"><label for="fDocs" data-t="l3"></label><textarea id="fDocs" data-ph="ph3"></textarea></div>
+      <button class="btn" type="submit" data-t="submit"></button>
     </form>
     <div id="sumBox" class="btn-col" hidden>
       <div class="sum" id="sumText"></div>
-      <button class="btn" type="button" id="copyBtn">1. कॉपी करें</button>
-      <a class="btn ghost" href="https://ig.me/m/zameen.ki.baat" target="_blank" rel="noopener">2. Instagram पर पेस्ट करके भेजें ↗</a>
+      <button class="btn" type="button" id="copyBtn" data-t="copy"></button>
+      <a class="btn ghost" href="https://ig.me/m/zameen.ki.baat" target="_blank" rel="noopener" data-t="ig"></a>
       <p class="toast" id="toast" aria-live="polite"></p>
-      <p class="small">आधार, बैंक नंबर या OTP कभी न भेजें।</p>
+      <p class="small" data-t="warn"></p>
     </div>
   </section>
 
-  <footer>
-    <span><b>ज़मीन की बात</b> • <a href="https://www.instagram.com/zameen.ki.baat/" target="_blank" rel="noopener">@zameen.ki.baat</a></span>
-    <span>सामान्य जानकारी, कानूनी सलाह नहीं। सरकारी प्रक्रिया बदल सकती है, पोर्टल पर पुष्टि करें।</span>
+  <footer id="foot" hidden>
+    <span><b data-t="brand"></b> • <a href="https://www.instagram.com/zameen.ki.baat/" target="_blank" rel="noopener">@zameen.ki.baat</a></span>
+    <span data-t="footer"></span>
   </footer>
 </div>
 
+<script src="i18n.js"></script>
 <script>
 (function(){
   const $=id=>document.getElementById(id);
   const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+  const LANGS=window.ZKB_LANGS, TT=window.ZKB_T;
+  let lang=store.get('zkb-lang'); if(!TT[lang]) lang=null;
+  const T=()=>TT[lang||'hi'];
+
+  /* ---------- language picker ---------- */
+  LANGS.forEach(l=>{
+    const b=document.createElement('button');b.type='button';b.className='langbtn';b.lang=l.html;b.dataset.code=l.code;
+    b.innerHTML='<span><b></b><br><small></small></span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+    b.querySelector('b').textContent=l.name;b.querySelector('small').textContent=l.sub;
+    b.addEventListener('click',()=>{lang=l.code;store.set('zkb-lang',lang);applyLang();location.hash='#home';route()});
+    $('langList').appendChild(b);
+  });
+
+  /* ---------- static text ---------- */
+  function applyLang(){
+    const t=T(), meta=LANGS.find(l=>l.code===(lang||'hi'));
+    document.documentElement.lang=meta.html;
+    document.querySelectorAll('[data-t]').forEach(el=>el.textContent=t[el.dataset.t]);
+    document.querySelectorAll('[data-th]').forEach(el=>el.innerHTML=t[el.dataset.th]);
+    document.querySelectorAll('[data-ph]').forEach(el=>{el.placeholder=t[el.dataset.ph];el.setAttribute('aria-label',t[el.dataset.ph])});
+    document.querySelectorAll('[data-tile]').forEach(el=>{const [a,b]=t.tiles[+el.dataset.tile];el.textContent=a;const s=document.createElement('small');s.textContent=b;el.appendChild(s)});
+    document.querySelectorAll('[data-list]').forEach(el=>{el.innerHTML='';t[el.dataset.list].forEach(x=>{const li=document.createElement('li');li.textContent=x;el.appendChild(li)})});
+    $('brandSeal').hidden=!(lang==='hi'||lang==='sd');
+    document.querySelectorAll('.langbtn').forEach(b=>b.setAttribute('aria-current',b.dataset.code===lang?'true':'false'));
+    buildChecks();buildTraps();buildWords();buildChips();drawWiz();
+    $('sumBox').hidden=true;$('askForm').hidden=false;
+  }
 
   /* ---------- routing: one screen at a time ---------- */
   const screens=['record','buy','ancestral','mutation','traps','words','ask'];
   function route(){
     const h=location.hash.replace('#','');
-    const on=screens.includes(h)?h:'';
-    $('home').hidden=!!on;
+    const showLang=!lang||h==='lang';
+    const on=!showLang&&screens.includes(h)?h:'';
+    $('lang').hidden=!showLang;
+    $('topBar').hidden=showLang;$('foot').hidden=showLang;
+    $('home').hidden=showLang||!!on;
     screens.forEach(s=>$(s).hidden=s!==on);
-    $('backBtn').hidden=!on;$('brandSeal').hidden=!!on;$('brandName').hidden=!!on;
+    $('backBtn').hidden=!on;$('brandName').hidden=!!on;$('langPill').hidden=!!on;
+    if(on) $('brandSeal').hidden=true; else $('brandSeal').hidden=!(lang==='hi'||lang==='sd');
     window.scrollTo(0,0);
   }
-  window.addEventListener('hashchange',route);route();
+  window.addEventListener('hashchange',route);
 
   /* ---------- checklist ---------- */
-  const CHECKS=[
-    ["खसरा और B-1 में विक्रेता का नाम","WebGIS पर दोनों में नाम, हिस्सा और रकबा मिलाएं।"],
-    ["नक्शे से मौके का मिलान","भू-नक्शा पर जगह, आकार और पड़ोसी खसरे देखें।"],
-    ["30 साल की रजिस्ट्री की चेन","हर पिछले मालिक की रजिस्ट्री हो, बीच में कड़ी न टूटे।"],
-    ["हर रजिस्ट्री के बाद नामांतरण","सिर्फ़ रजिस्ट्री काफ़ी नहीं, राजस्व रिकॉर्ड में नाम हो।"],
-    ["आदिवासी भूमि तो नहीं","धारा 165(6) वाली ज़मीन पर कलेक्टर की अनुमति ज़रूरी।"],
-    ["सरकारी / चरनोई / वन भूमि तो नहीं","खसरे में भूमि का प्रकार और टिप्पणी पढ़ें।"],
-    ["बैंक लोन या गिरवी तो नहीं","संपदा 2.0 पर दस्तावेज़ खोजें, बैंक से NOC लें।"],
-    ["कोई केस तो नहीं चल रहा","RCMS पर खसरा नंबर से केस देखें।"],
-    ["डायवर्सन हुआ है","प्लॉट या मकान के लिए डायवर्सन आदेश की कॉपी लें।"],
-    ["कॉलोनी का लाइसेंस और RERA","कॉलोनाइज़र लाइसेंस, नक्शा मंज़ूरी, MP RERA रजिस्ट्रेशन।"],
-    ["रास्ता किसका है","रास्ता कहीं पड़ोसी की ज़मीन से तो नहीं जाता।"],
-    ["सभी मालिक हस्ताक्षर करें","B-1 में जितने नाम, सबकी सहमति ज़रूरी।"],
-    ["भुगतान सिर्फ़ बैंक से","₹20,000 या ज़्यादा नकद लेना मना है (धारा 269SS)।"],
-    ["सिर्फ़ रजिस्टर्ड बैनामा","नोटरी एग्रीमेंट या GPA से मालिकाना नहीं मिलता।"]
-  ];
   let ticked=store.get('zkb-checks')||[];
-  const ul=$('checks');
-  CHECKS.forEach((c,i)=>{
-    const li=document.createElement('li');li.className='ck';
-    li.innerHTML=`<label><input type="checkbox" id="ck${i}"><span></span></label><button class="why" type="button" aria-expanded="false" aria-label="ज़्यादा जानें">?</button><div class="more" hidden></div>`;
-    li.querySelector('span').textContent=c[0];li.querySelector('.more').textContent=c[1];
-    const cb=li.querySelector('input');cb.checked=ticked.includes(i);
-    cb.addEventListener('change',()=>{ticked=CHECKS.map((_,j)=>j).filter(j=>$('ck'+j).checked);store.set('zkb-checks',ticked);meter()});
-    const why=li.querySelector('.why'),more=li.querySelector('.more');
-    why.addEventListener('click',()=>{more.hidden=!more.hidden;why.setAttribute('aria-expanded',String(!more.hidden));why.textContent=more.hidden?'?':'×'});
-    ul.appendChild(li);
-  });
-  function meter(){const n=ticked.length;$('barFill').style.width=(n/CHECKS.length*100)+'%';$('barText').textContent=n+'/'+CHECKS.length}
-  meter();
-  $('resetChecks').addEventListener('click',()=>{ticked=[];store.set('zkb-checks',ticked);CHECKS.forEach((_,j)=>$('ck'+j).checked=false);meter()});
+  function buildChecks(){
+    const ul=$('checks');ul.innerHTML='';
+    T().checks.forEach((c,i)=>{
+      const li=document.createElement('li');li.className='ck';
+      li.innerHTML=`<label><input type="checkbox" id="ck${i}"><span></span></label><button class="why" type="button" aria-expanded="false" aria-label="?">?</button><div class="more" hidden></div>`;
+      li.querySelector('span').textContent=c[0];li.querySelector('.more').textContent=c[1];
+      const cb=li.querySelector('input');cb.checked=ticked.includes(i);
+      cb.addEventListener('change',()=>{ticked=T().checks.map((_,j)=>j).filter(j=>$('ck'+j).checked);store.set('zkb-checks',ticked);meter()});
+      const why=li.querySelector('.why'),more=li.querySelector('.more');
+      why.addEventListener('click',()=>{more.hidden=!more.hidden;why.setAttribute('aria-expanded',String(!more.hidden));why.textContent=more.hidden?'?':'×'});
+      ul.appendChild(li);
+    });
+    meter();
+  }
+  function meter(){const n=ticked.length,tot=T().checks.length;$('barFill').style.width=(n/tot*100)+'%';$('barText').textContent=n+'/'+tot}
+  $('resetChecks').addEventListener('click',()=>{ticked=[];store.set('zkb-checks',ticked);T().checks.forEach((_,j)=>$('ck'+j).checked=false);meter()});
 
   /* ---------- wizard: one question per screen ---------- */
-  const QS=[
-    {k:'have',t:'आपके पास क्या है?',o:[['khasra','पुराना खसरा या खसरा नंबर'],['deed','पुरानी रजिस्ट्री / बैनामा'],['village','सिर्फ़ गाँव और मालिक का नाम'],['nothing','कुछ नहीं, बस सुना है']]},
-    {k:'who',t:'रिकॉर्ड में आखिरी मालिक कौन था?',o:[['father','पिता या माता'],['grand','दादा या दादी'],['older','परदादा या उससे पहले']]},
-    {k:'now',t:'ज़मीन पर अभी कौन है?',o:[['unknown','पता नहीं / खाली है'],['family','परिवार का कोई और'],['outsider','कोई बाहरी व्यक्ति'],['govt','सरकार / कोई प्रोजेक्ट']]}
-  ];
+  const KEYS=[['have',['khasra','deed','village','nothing']],['who',['father','grand','older']],['now',['unknown','family','outsider','govt']]];
   const ans={};let step=0;
-  const dots=document.querySelectorAll('#ancestral .dots i');
   function drawWiz(){
-    dots.forEach((d,i)=>d.classList.toggle('on',i<=Math.min(step,2)));
+    const t=T();
+    document.querySelectorAll('#ancestral .dots i').forEach((d,i)=>d.classList.toggle('on',i<=Math.min(step,2)));
     const w=$('wiz');w.innerHTML='';
-    if(step<QS.length){
-      const q=QS[step];
-      const t=document.createElement('p');t.className='qtitle';t.textContent=(step+1)+'. '+q.t;
-      const box=document.createElement('div');box.className='choices';box.style.marginTop='14px';
-      q.o.forEach(([v,label])=>{const b=document.createElement('button');b.type='button';b.className='choice';b.textContent=label;
-        b.addEventListener('click',()=>{ans[q.k]=v;step++;drawWiz()});box.appendChild(b)});
-      w.append(t,box);
-      if(step>0){const bk=document.createElement('button');bk.type='button';bk.className='btn ghost';bk.style.marginTop='14px';bk.textContent='पिछला सवाल';bk.addEventListener('click',()=>{step--;drawWiz()});w.appendChild(bk)}
+    if(step<3){
+      const [qText,opts]=t.qs[step],[key,vals]=KEYS[step];
+      const p=document.createElement('p');p.className='qtitle';p.textContent=(step+1)+'. '+qText;
+      const box=document.createElement('div');box.className='choices';
+      opts.forEach((label,i)=>{const b=document.createElement('button');b.type='button';b.className='choice';b.textContent=label;
+        b.addEventListener('click',()=>{ans[key]=vals[i];step++;drawWiz()});box.appendChild(b)});
+      w.append(p,box);
+      if(step>0){const bk=document.createElement('button');bk.type='button';bk.className='btn ghost';bk.style.marginTop='14px';bk.textContent=t.prev;bk.addEventListener('click',()=>{step--;drawWiz()});w.appendChild(bk)}
       return;
     }
-    const s=[];let flag='';
-    s.push({khasra:'MP भूलेख पर खसरा नंबर से आज का मालिक देखें।',deed:'रजिस्ट्री से खसरा नंबर निकालें, फिर MP भूलेख पर देखें।',village:'MP भूलेख पर मालिक के नाम से खोजें।',nothing:'बड़ों से गाँव, तहसील और मालिक का पूरा नाम पता करें।'}[ans.have]);
-    s.push('नाम न मिले तो तहसील से पुराने रिकॉर्ड (जैसे 1958-59) की प्रमाणित नकल लें।');
-    s.push(ans.who==='father'?'मृत्यु प्रमाण-पत्र के साथ RCMS पर वारिसाना नामांतरण करें।':'हर पीढ़ी का मृत्यु प्रमाण-पत्र और वंशावली बनाएं, फिर वारिसाना नामांतरण करें।');
-    if(ans.now==='family')s.push('परिवार में आपसी सहमति से बंटवारा कराएं।');
-    if(ans.now==='unknown')s.push('मौके पर जाकर देखें कि ज़मीन पर कौन है।');
-    if(ans.now==='outsider')flag='बाहरी कब्ज़े में देर करने से हक कमज़ोर हो सकता है। जल्दी वकील से मिलें।';
-    if(ans.now==='govt')flag='मुआवज़ा अक्सर पुराने मालिक के नाम पड़ा रहता है। वारिस साबित करके दावा हो सकता है।';
-    const r=document.createElement('div');r.className='result';
-    r.innerHTML='<p class="qtitle">आपके अगले कदम</p>';
-    const ol=document.createElement('ol');ol.className='steps';s.forEach(x=>{const li=document.createElement('li');li.textContent=x;ol.appendChild(li)});r.appendChild(ol);
-    if(flag){const f=document.createElement('p');f.className='flag';f.textContent='⚠ '+flag;r.appendChild(f)}
-    const go=document.createElement('a');go.className='btn';go.href='#ask';go.textContent='अपना मामला भेजें';
-    const again=document.createElement('button');again.type='button';again.className='btn ghost';again.textContent='फिर से शुरू करें';again.addEventListener('click',()=>{step=0;drawWiz()});
-    r.append(go,again);w.appendChild(r);
+    const r=t.res,s=[];let flag='';
+    s.push(r.have[KEYS[0][1].indexOf(ans.have)]);
+    s.push(r.old);
+    s.push(ans.who==='father'?r.father:r.older);
+    if(ans.now==='family')s.push(r.family);
+    if(ans.now==='unknown')s.push(r.unknown);
+    if(ans.now==='outsider')flag=r.outsider;
+    if(ans.now==='govt')flag=r.govt;
+    const box=document.createElement('div');box.className='result';
+    const h=document.createElement('p');h.className='qtitle';h.textContent=t.nextSteps;box.appendChild(h);
+    const ol=document.createElement('ol');ol.className='steps';s.forEach(x=>{const li=document.createElement('li');li.textContent=x;ol.appendChild(li)});box.appendChild(ol);
+    if(flag){const f=document.createElement('p');f.className='flag';f.textContent='⚠ '+flag;box.appendChild(f)}
+    const go=document.createElement('a');go.className='btn';go.href='#ask';go.textContent=t.cta;
+    const again=document.createElement('button');again.type='button';again.className='btn ghost';again.textContent=t.again;again.addEventListener('click',()=>{step=0;drawWiz()});
+    box.append(go,again);w.appendChild(box);
   }
-  drawWiz();
 
-  /* ---------- traps ---------- */
-  const TRAPS=[
-    ['नोटरी से प्रॉपर्टी नहीं मिलती','मालिकाना हक सिर्फ़ रजिस्टर्ड बैनामे से मिलता है।'],
-    ['GPA पर खरीदी = खरीदी नहीं','पावर ऑफ़ अटॉर्नी से बिक्री कानूनी बिक्री नहीं है।'],
-    ['नकद में सौदा न करें','₹20,000 या ज़्यादा नकद लेना कानून में मना है।'],
-    ['आदिवासी ज़मीन','कलेक्टर की अनुमति बिना बिक्री शून्य है।'],
-    ['चरनोई / सरकारी ज़मीन','उस पर बना घर कभी भी हटाया जा सकता है।'],
-    ['सालों रहने से मालिक नहीं बनते','कब्ज़ा अलग है, कागज़ों में नाम अलग।']
-  ];
-  TRAPS.forEach(t=>{const d=document.createElement('div');d.className='trap';d.innerHTML='<span class="x" aria-hidden="true">!</span><div><b></b><span></span></div>';d.querySelector('b').textContent=t[0];d.querySelector('div span').textContent=t[1];$('trapList').appendChild(d)});
-
-  /* ---------- glossary ---------- */
-  const WORDS=[
-    ["खसरा","ज़मीन का नंबर, रकबा, मालिक और प्रकार बताने वाला रिकॉर्ड।"],
-    ["B-1 (खतौनी)","किसके नाम कितनी ज़मीन है, उसकी सूची।"],
-    ["भू-नक्शा","गाँव के नक्शे पर आपकी ज़मीन कहाँ है।"],
-    ["नामांतरण","बिक्री या विरासत के बाद रिकॉर्ड में नया नाम चढ़ाना।"],
-    ["बंटवारा","साझा ज़मीन के हिस्से अलग करना।"],
-    ["अधिकार अभिलेख 1958-59","MP का पुराना रिकॉर्ड, पुराने हक साबित करने में काम आता है।"],
-    ["वाजिब-उल-अर्ज़","गाँव के पानी, रास्ते, चराई जैसे साझा हकों का रिकॉर्ड।"],
-    ["चरनोई","पशु चराने की ज़मीन। इसे खरीदा-बेचा नहीं जा सकता।"],
-    ["फ़ील्ड बुक","सर्वे के समय की नाप-जोख। सीमा विवाद में काम आती है।"],
-    ["डायवर्सन","खेती की ज़मीन को आवासीय या दुकान के उपयोग में बदलना।"],
-    ["नज़ूल","शहर की सरकारी ज़मीन, अक्सर लीज़ पर।"],
-    ["रकबा","ज़मीन का माप। 1 हेक्टेयर ≈ 2.47 एकड़।"]
-  ];
-  const wl=$('wordList');
-  WORDS.forEach(w=>{const d=document.createElement('details');d.className='w';d.innerHTML='<summary><b></b></summary><p></p>';d.querySelector('b').textContent=w[0];d.querySelector('p').textContent=w[1];d.dataset.k=(w[0]+' '+w[1]).toLowerCase();wl.appendChild(d)});
-  $('wordSearch').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();wl.querySelectorAll('details').forEach(d=>d.hidden=q&&!d.dataset.k.includes(q))});
+  /* ---------- traps & glossary ---------- */
+  function buildTraps(){
+    const el=$('trapList');el.innerHTML='';
+    T().traps.forEach(x=>{const d=document.createElement('div');d.className='trap';d.innerHTML='<span class="x" aria-hidden="true">!</span><div><b></b><span></span></div>';d.querySelector('b').textContent=x[0];d.querySelector('div span').textContent=x[1];el.appendChild(d)});
+  }
+  function buildWords(){
+    const wl=$('wordList');wl.innerHTML='';$('wordSearch').value='';
+    T().words.forEach(x=>{const d=document.createElement('details');d.className='w';d.innerHTML='<summary><b></b></summary><p></p>';d.querySelector('b').textContent=x[0];d.querySelector('p').textContent=x[1];d.dataset.k=(x[0]+' '+x[1]).toLowerCase();wl.appendChild(d)});
+  }
+  $('wordSearch').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();$('wordList').querySelectorAll('details').forEach(d=>d.hidden=!!q&&!d.dataset.k.includes(q))});
 
   /* ---------- ask ---------- */
-  let issue='खरीदने से पहले जाँच';
-  document.querySelectorAll('#issueChips .chip').forEach(c=>c.addEventListener('click',()=>{
-    document.querySelectorAll('#issueChips .chip').forEach(x=>x.setAttribute('aria-pressed',x===c?'true':'false'));issue=c.textContent}));
+  let issueIdx=0;
+  function buildChips(){
+    const box=$('issueChips');box.innerHTML='';
+    T().chips.forEach((c,i)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=c;b.setAttribute('aria-pressed',i===issueIdx?'true':'false');
+      b.addEventListener('click',()=>{issueIdx=i;box.querySelectorAll('.chip').forEach((x,j)=>x.setAttribute('aria-pressed',j===i?'true':'false'))});box.appendChild(b)});
+  }
   ['fPlace','fDocs'].forEach(id=>{const el=$(id);const v=store.get('zkb-'+id);if(v)el.value=v;el.addEventListener('input',()=>store.set('zkb-'+id,el.value))});
   $('askForm').addEventListener('submit',e=>{
-    e.preventDefault();
-    $('sumText').textContent=['नमस्ते, ज़मीन की बात वेबसाइट से:','','समस्या: '+issue,'जगह: '+($('fPlace').value.trim()||'—'),'','विवरण: '+($('fDocs').value.trim()||'—')].join('\n');
+    e.preventDefault();const t=T();
+    $('sumText').textContent=[t.sumHello,'',t.sumIssue+': '+t.chips[issueIdx],t.sumPlace+': '+($('fPlace').value.trim()||'—'),'',t.sumDetail+': '+($('fDocs').value.trim()||'—')].join('\n');
     $('askForm').hidden=true;$('sumBox').hidden=false;$('toast').textContent='';
   });
   $('copyBtn').addEventListener('click',()=>{
-    const t=$('sumText').textContent;
-    const fb=()=>{const r=document.createRange();r.selectNodeContents($('sumText'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('toast').textContent='टेक्स्ट चुन लिया है, अब कॉपी दबाएं।'};
-    try{navigator.clipboard.writeText(t).then(()=>{$('toast').textContent='✓ कॉपी हो गया। अब Instagram पर पेस्ट करें।'},fb)}catch(e){fb()}
+    const t=T(),txt=$('sumText').textContent;
+    const fb=()=>{const r=document.createRange();r.selectNodeContents($('sumText'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('toast').textContent=t.selected};
+    try{navigator.clipboard.writeText(txt).then(()=>{$('toast').textContent=t.copied},fb)}catch(e){fb()}
   });
+
+  applyLang();route();
 })();
 </script>
 </body>
